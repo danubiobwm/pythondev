@@ -1,0 +1,8 @@
+Eletrônicos, 300
+Roupas, 150
+Roupas, 150
+Alimentos, 450
+Jogos, 100
+Peças, 200
+Chocolates, 250
+Eletrônicos, 100
