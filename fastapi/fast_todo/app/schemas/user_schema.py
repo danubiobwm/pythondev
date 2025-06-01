@@ -1,6 +1,16 @@
 from pydantic import BaseModel, EmailStr, Field
+from uuid import UUID
+from typing import Optional
 
-class UserSchema(BaseModel):
-  email: EmailStr = Field(..., description="The user's email address")
-  username: str = Field(..., min_length=3, max_length=50, description="The user's username")
-  password: str = Field(..., min_length=8, max_length=128, description="The user's password")
+class UserAuth(BaseModel):
+    email: EmailStr = Field(..., description='E-mail Usuário')
+    username: str = Field(..., min_length=5, max_length=50, description='Username Usuário')
+    password: str = Field(..., min_length=5, max_length=20, description='Senha Usuário')
+
+class UserDetail(BaseModel):
+    user_id: UUID
+    username: str
+    email: EmailStr
+    first_name: Optional[str]
+    last_name: Optional[str]
+    disabled: Optional[bool]
