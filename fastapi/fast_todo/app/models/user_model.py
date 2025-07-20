@@ -4,7 +4,7 @@ from pydantic import Field, EmailStr
 from datetime import datetime
 from typing import Optional
 
-class UserModel(Document):
+class User(Document):
     user_id: UUID = Field(default_factory=uuid4)
     username: Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
@@ -12,8 +12,10 @@ class UserModel(Document):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     disabled: Optional[bool] = None
+
     class Settings:
         name = "User"
+
     def __repr__(self) -> str:
         return f"<User {self.email}>"
 
@@ -24,7 +26,7 @@ class UserModel(Document):
         return hash(self.email)
 
     def __eq__(self, other: object) -> bool:
-        if isinstance(other, UserModel):
+        if isinstance(other, User):  # Changed from UserModel to User
             return self.email == other.email
         return False
 
@@ -33,5 +35,5 @@ class UserModel(Document):
         return self.id.generation_time
 
     @classmethod
-    async def by_email(self, email: str) -> "UserModel":
-        return await self.find_one(self.email == email)
+    async def by_email(cls, email: str) -> Optional["User"]:  # Fixed type hints and parameter name
+        return await cls.find_one(cls.email == email)

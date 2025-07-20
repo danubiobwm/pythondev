@@ -31,3 +31,7 @@ def create_access_token(subject: Union[str, Any], expires_delta: timedelta = Non
     }
 
     return jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.ALGORITHM)
+
+def create_refresh_token(subject: Union[str, Any], expires_delta: timedelta = None) -> str:
+    """Create a refresh token (wrapper around create_access_token)"""
+    return create_access_token(subject, expires_delta, is_refresh=True)
