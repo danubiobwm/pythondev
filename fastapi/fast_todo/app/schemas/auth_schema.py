@@ -3,8 +3,8 @@ from uuid import UUID
 
 class TokenSchema(BaseModel):
     access_token: str
-    token_type: str
+    refresh_token: str
 
 class TokenPayload(BaseModel):
-    sub: None | UUID = None
-    exp: None | int = None
+    sub: UUID = None
+    exp: int = None

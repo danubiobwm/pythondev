@@ -36,7 +36,7 @@ async def get_current_user(token: str = Depends(oauth_reusavel)) -> User:
         )
     user = await UserService.get_user_by_id(token_data.sub)
 
-    if not User:
+    if not user:
         raise HTTPException(
             status_code = status.HTTP_404_NOT_FOUND,
             details = 'Não foi possível encontrar o usuário',
