@@ -2,6 +2,7 @@ from models.user_model import User
 from models.todo_model import Todo
 from typing import List
 from schemas.todo_schema import TodoCreate, TodoUpdate
+from uuid import UUID
 
 class TodoService:
   @staticmethod
@@ -14,3 +15,22 @@ class TodoService:
       todo = Todo(**data.dict(), owner=user)
       return await todo.insert()
 
+  @staticmethod
+  async def detail(user: User, todo_id: UUID):
+      todo = await Todo.find_one(Todo.todo_id == todo_id, Todo.owner.id == user.id)
+      return todo
+
+  @staticmethod
+  async def update_todo(user: User, todo_id: UUID, data: TodoUpdate):
+      todo = await TodoService.detail(user, todo_id)
+      await todo.update({"$set": data.dict(exclude_unset=True)})
+      await todo.save()
+      return todo
+
+  @staticmethod
+  async def delete_todo(user: User, todo_id: UUID)->None:
+      todo = await TodoService.detail(user, todo_id)
+      if todo:
+          await todo.delete()
+          return True
+      return False
