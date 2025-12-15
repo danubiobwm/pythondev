@@ -3,7 +3,7 @@ import streamlit as st
 import plotly.express as px
 from dataset import df
 from utils import format_number
-from graficos import grafico_map_estado
+from graficos import grafico_map_estado, grafico_rec_mensal
 
 # Sample data for demonstration
 st.set_page_config(page_icon=":bar_chart:", layout="wide")
@@ -21,4 +21,5 @@ with aba2:
     st.plotly_chart(grafico_map_estado, use_container_width=True)
   with coluna2:
     st.metric("Quantidade Vendas", df.shape[0])
+    st.plotly_chart(grafico_rec_mensal, use_container_width=True)
 
