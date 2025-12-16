@@ -1,7 +1,7 @@
 from pdb import line_prefix
 from turtle import title
 import plotly.express as px
-from utils import df_rec_estado, df_rec_mensal
+from utils import df_rec_estado, df_rec_mensal, df_rec_categoria
 
 
 grafico_map_estado = px.scatter_geo(
@@ -41,4 +41,13 @@ grafico_rec_estado= px.bar(
     text_auto=True,
     title='Top receita por Estado',
 
+    )
+
+
+grafico_rec_categoria= px.bar(
+    df_rec_categoria.head(10).reset_index(),
+    x='Categoria do Produto',
+    y='Preço',
+    text_auto=True,
+    title='Top receita por Categoria',
     )

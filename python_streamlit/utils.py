@@ -20,3 +20,7 @@ df_rec_mensal = df.set_index('Data da Compra').groupby(pd.Grouper(freq='ME'))['P
 df_rec_mensal['Ano'] = df_rec_mensal['Data da Compra'].dt.year
 df_rec_mensal['Mes'] = df_rec_mensal['Data da Compra'].dt.month_name()
 #print(df_rec_mensal)
+
+# 3 - Dataframe Receita por Categoria
+df_rec_categoria = df.groupby('Categoria do Produto')[['Preço']].sum().sort_values('Preço', ascending=False)
+#print(df_rec_categoria.head())
