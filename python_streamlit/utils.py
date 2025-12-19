@@ -24,3 +24,7 @@ df_rec_mensal['Mes'] = df_rec_mensal['Data da Compra'].dt.month_name()
 # 3 - Dataframe Receita por Categoria
 df_rec_categoria = df.groupby('Categoria do Produto')[['Preço']].sum().sort_values('Preço', ascending=False)
 #print(df_rec_categoria.head())
+
+# 4 - Dataframe Receita por Vendedor
+df_rec_vendedor = pd.DataFrame(df.groupby('Vendedor')['Preço'].agg(['sum', 'count']))
+#print(df_rec_vendedor.head())

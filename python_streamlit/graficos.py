@@ -1,7 +1,7 @@
 from pdb import line_prefix
 from turtle import title
 import plotly.express as px
-from utils import df_rec_estado, df_rec_mensal, df_rec_categoria
+from utils import df_rec_estado, df_rec_mensal, df_rec_categoria, df_rec_vendedor
 
 
 grafico_map_estado = px.scatter_geo(
@@ -51,3 +51,19 @@ grafico_rec_categoria= px.bar(
     text_auto=True,
     title='Top receita por Categoria',
     )
+
+grafico_rec_vendedores = px.bar(
+    df_rec_vendedor[['sum', 'count']].sort_values('sum', ascending=False).head(7),
+    x='sum',
+    y=df_rec_vendedor[['sum', 'count']].sort_values('sum', ascending=False).head(7).index,
+    text_auto=True,
+    title='Top 10 Vendedores por Receita',
+)
+
+grafico_vendas_vendedores = px.bar(
+    df_rec_vendedor[['count']].sort_values('count', ascending=False).head(7),
+    x='count',
+    y=df_rec_vendedor[['count']].sort_values('count', ascending=False).head(7).index,
+    text_auto=True,
+    title='Top 7 Vendedores por Quantidade de Vendas',
+)
