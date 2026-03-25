@@ -5,4 +5,6 @@ ecom_sales = pd.read_csv(
     )
 
 #print(ecom_sales)
-print(ecom_sales.head())
+#print(ecom_sales.head())
+ecom_sale=ecom_sales.groupby("Country")["OrderValue"].sum().reset_index(name="Total Sales").sort_values(by="Total Sales", ascending=False)
+print(ecom_sale)
