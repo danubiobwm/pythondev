@@ -8,4 +8,5 @@ bar_fig = px.bar(
                  title="Total Sales by Country",
                  orientation="h"
                  )
-bar_fig.show()
+bar_fig.update_layout({'bargap':0.5})
+#bar_fig.show()
