@@ -1,8 +1,10 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def homepage(request):
-  return HttpResponse("Hello world")
+  nome = "Danubio"
+  return render(request, "home.html", {'nome':nome})
 
 
 def aboutpage(request):
-  return HttpResponse("Page About")
+  frutas={"maça", "Banana", "Melão"}
+  return render(request, "about.html", {'frutas':frutas})
