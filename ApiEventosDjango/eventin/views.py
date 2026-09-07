@@ -1,18 +1,11 @@
-from django.http import JsonResponse
+from rest_framework import viewsets
+from .models import Evento, Participante
+from .serializers import EventoSerializer, ParticipanteSerializer
 
-def participantes(request):
-  if request.method == 'GET':
-    participante={
-      "id": 1,
-      "nome": "João da Silva",
-      "email": "joao.silva@example.com",
-      "telefone": "11999999999",
-      "empresa": "Empresa X",
-      "cargo": "Desenvolvedor",
-      "cidade": "São Paulo",
-      "estado": "SP",
-      "pais": "Brasil",
-      "cep": "1234567890",
-      "endereco": "Rua das Flores, 123",
-    }
-    return JsonResponse(participante)
+class EventosViewSet(viewsets.ModelViewSet):
+  queryset = Evento.objects.all()
+  serializer_class = EventoSerializer
+
+class ParticipantesViewSet(viewsets.ModelViewSet):
+  queryset = Participante.objects.all()
+  serializer_class = ParticipanteSerializer
