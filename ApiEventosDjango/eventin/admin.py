@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Evento, Participante
+from .models import Evento, Participante, Inscricao
 
 
 class Eventos(admin.ModelAdmin):
@@ -16,6 +16,12 @@ class Participantes(admin.ModelAdmin):
   list_per_page = 10
 
 
+class Inscricoes(admin.ModelAdmin):
+  list_display = ('id', 'evento', 'participante', 'data_inscricao')
+  list_display_links = ('id',)
+  list_per_page = 10
+
 
 admin.site.register(Evento, Eventos)
 admin.site.register(Participante, Participantes)
+admin.site.register(Inscricao, Inscricoes)
