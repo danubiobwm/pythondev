@@ -1,8 +1,9 @@
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, filters
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Evento, Participante, Inscricao
 from .serializers import EventoSerializer, ParticipanteSerializer, InscricaoSerializer, ListInscricaoParticipanteSerializer, ListInscricaoEventoSerializer
+from django_filters.rest_framework import DjangoFilterBackend
 
 class EventosViewSet(viewsets.ModelViewSet):
   authentication_classes = [BasicAuthentication]
@@ -15,6 +16,9 @@ class ParticipantesViewSet(viewsets.ModelViewSet):
   permission_classes = [IsAuthenticated]
   queryset = Participante.objects.all()
   serializer_class = ParticipanteSerializer
+  filter_backends = [DjangoFilterBackend,  filters.OrderingFilter , filters.SearchFilter]
+  ordering_fields = ['nome']
+  search_fields = ['nome', 'cpf']
 
 class InscricoesViewSet(viewsets.ModelViewSet):
   authentication_classes = [BasicAuthentication]
